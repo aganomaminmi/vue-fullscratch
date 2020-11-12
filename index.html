@@ -6,20 +6,26 @@
   </head>
   <body>
     <h1>Vue.js</h1>
-    <div id="app">
-      {{message}}
-    </div>
+    <div id="app"></div>
 
     <script>
       let data = {
-        message: 'Hello Vue!'
+        message: 'Hello Vue!',
+        items: ['One', 'two', 'three', 'four', 'five']
       }
 
       let app = new Vue({
         el: '#app',
         data: data,
         render: (element) => {
-          return element('p', data.message);
+          let p = element('p', data.message);
+          let li = data.items.map( value => {
+            return element('li', value);
+          });
+          console.log(li);
+          let ol = element('ol', li);
+
+          return element('div', [p, ol]);
         }
       });
     </script>
